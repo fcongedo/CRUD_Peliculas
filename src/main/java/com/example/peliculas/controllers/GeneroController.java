@@ -7,11 +7,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.example.peliculas.dao.IGeneroRepository;
 import com.example.peliculas.entities.Genero;
+import com.example.peliculas.services.IGeneroService;
 
 @RestController
 public class GeneroController {
 	
-	private IGeneroRepository generoRepository;
+	private IGeneroService service;
 	
 	public GeneroController() {
 		
@@ -21,14 +22,15 @@ public class GeneroController {
 	Genero genero = new Genero();
 	genero.setNombre(nombre);
 	
-	generoRepository.save(genero);
+	
+	service.save(genero);
 	
 	return genero.getId();
 		
 	}
 	@GetMapping("genero/{id}")
 	public String buscardPorId(@PathVariable(name = "id") Long id) {
-		return generoRepository.findById(id).getNombre();
+		return service.findById(id).getNombre();
 	}
 
 }
