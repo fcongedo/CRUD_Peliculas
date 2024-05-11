@@ -1,7 +1,7 @@
 package com.example.peliculas.entities;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -16,27 +16,47 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+
+
 
 @Entity
 @Table(name = "peliculas")
 public class Pelicula implements Serializable {
 
-	private static final long serialVersionUID = -1878563845132140383L;
+	private static final long serialVersionUID = -4623764282362001928L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@NotEmpty()
+
+	@NotEmpty(message = "El nombre no debe ser vacio")
 	private String nombre;
 
 	@Column(name = "fecha_estreno")
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@NotNull(message = "El campo fecha de estreno no debe estar vacio")
 	private Date fechaEstreno;
+	
+
+	@NotNull()
 	@OneToOne
 	private Genero genero;
+	
 	@ManyToMany
 	private List<Actor> protagonistas;
+	
+	private String imagen;
+
+	public String getImagen() {
+		return imagen;
+	}
+
+	public void setImagen(String imagen) {
+		this.imagen = imagen;
+	}
 
 	public Long getId() {
 		return id;
@@ -70,7 +90,6 @@ public class Pelicula implements Serializable {
 		this.genero = genero;
 	}
 
-	@ManyToMany
 	public List<Actor> getProtagonistas() {
 		return protagonistas;
 	}

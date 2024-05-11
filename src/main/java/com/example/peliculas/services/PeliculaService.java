@@ -2,13 +2,14 @@ package com.example.peliculas.services;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.peliculas.dao.IPeliculaRepository;
 import com.example.peliculas.entities.Pelicula;
 @Service
 public class PeliculaService implements IPeliculaService {
-
+	@Autowired
 	private IPeliculaRepository repo;
 
 	@Override
