@@ -29,18 +29,22 @@ public class PeliculasController {
 		model.addAttribute("titulo", "Nueva Pelicula");
 		return "pelicula";
 	}
+
 	@GetMapping("/pelicula/{id}")
-	public String crear(@PathVariable(name="id") Long id, Model model) {
+	public String crear(@PathVariable(name = "id") Long id, Model model) {
 		Pelicula pelicula = new Pelicula();
 		model.addAttribute("pelicula", pelicula);
 		model.addAttribute("titulo", "Nueva Pelicula");
 		return "pelicula";
 	}
+
 	@PostMapping("/pelicula")
 	public String guardar(Pelicula pelicula) {
+		service.save(pelicula);
 		return "redirect:home";
 	}
-	@GetMapping({"/","/home","/index"})
+
+	@GetMapping({ "/", "/home", "/index" })
 	public String home() {
 		return "home";
 	}
