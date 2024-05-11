@@ -26,6 +26,7 @@ public class Pelicula implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	@NotEmpty()
 	private String nombre;
 
 	@Column(name = "fecha_estreno")
@@ -34,6 +35,7 @@ public class Pelicula implements Serializable {
 	private Date fechaEstreno;
 	@OneToOne
 	private Genero genero;
+	@ManyToMany
 	private List<Actor> protagonistas;
 
 	public Long getId() {
